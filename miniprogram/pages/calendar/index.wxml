@@ -1,0 +1,24 @@
+<!--miniprogram/pages/calendar/index.js.wxml-->
+<!-- <view class="section__p">
+  <h3></h3>
+</view> -->
+<view class="section__title">
+  上次月经开始第一天
+</view>
+<calendar 
+  calendarConfig="{{calendarConfig}}"            
+  bind:onTapDay="onTapDay" 
+  bind:afterTapDay="afterTapDay"
+  bind:onSwipe="onSwipe" 
+  bind:whenChangeWeek="whenChangeWeek" 
+  bind:whenChangeMonth="whenChangeMonth"
+  bind:afterCalendarRender="afterCalendarRender" />
+  <view class="uploader-text" bindtap="handleOk">
+      <text>确定</text>
+  </view>
+  <view class="uploader-text" bindtap="nextStep">
+      <text>下一步</text>
+  </view>
+  <!-- <view class="uploader-text" bindtap="focusDate">
+      <text>聚焦日期</text>
+  </view> -->

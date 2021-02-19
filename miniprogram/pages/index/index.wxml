@@ -2,15 +2,15 @@
 <view class="container">
 
   <!-- 用户 openid -->
-  <view class="userinfo">
+  <view class="userinfo" wx:if="{{uniqueOne}}">
     <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar"
       style="background-image: url({{avatarUrl}})" size="default"></button>
     <view class="userinfo-nickname-wrapper">
       <h2 class="userinfo-nickname">请设置您的经期数据</h2>
     </view>
   </view>
-  <view class="printDiv">
-    <form class="printForm" bindsubmit="formSubmit" bindreset="formReset">
+  <view class="printDiv" wx:if="{{uniqueOne}}">
+    <form class="printForm" bindsubmit="toConfig" bindreset="formReset">
       <view class="section__title">
         经期
       </view>
@@ -31,6 +31,25 @@
       </view>
     </form>
   </view>
+
+  <view class="warningModal" wx:if="{{!hideAvatar}}">
+    <view class="modalAvatar">
+      <view class="bg-img"
+        style="background-image: url(http://m.qpic.cn/psc?/d792ad94-b177-4e25-a377-164cd4c4031f/TmEUgtj9EK6.7V8ajmQrEM.vat4FRqCUh0R7yg6YMij5s2YZGIsCA.jbNsuT9bNlijPThBp*kF7BG1OmVm3*rdqHZkUvYfl0g44lWVLpkwk!/b&bo=XwE5Al8BOQIDKQw!&rf=viewer_4);height:450px;width:350px;">
+        <view class="cu-bar justify-end text-white">
+          <view class="action" bindtap="hideModal">
+            <text class="cuIcon-close "></text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="uploader-text" bindtap="hideAvatar">
+      <text>I know!</text>
+    </view>
+  </view>
+
+
+
 
   <!-- 上传图片
   <view class="uploader">

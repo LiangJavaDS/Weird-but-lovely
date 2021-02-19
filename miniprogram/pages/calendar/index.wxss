@@ -1,0 +1,10 @@
+/* miniprogram/pages/calendar/index.js.wxss */
+.section__title {
+  font-size: 32rpx;
+  /* display: inline; */
+  color:red;
+  /* align-content: center; */
+}
+.uploader-text{
+  
+}

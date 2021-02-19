@@ -5,7 +5,10 @@
   align-items: center;
   box-sizing: border-box;
 } 
-
+.liang{
+  width: 400px;
+  height: 400px;
+}
 button {
   background: initial;
 }

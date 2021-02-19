@@ -1,24 +1,101 @@
 //index.js
 const app = getApp()
-
+const DB = wx.cloud.database().collection('startDate');
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    uniqueOne: false,//控制只对一人开放，录入姨妈信息
+    hideAvatar: false//控制头像的显示隐藏
+  },
+
+  hideAvatar: function () {
+    // console.log('7878app', app.globalData.openid)
+    if (app.globalData.openid == "oMwtS5d9s50prA1IA03aDrbw3yHk") {
+      this.setData({
+        hideAvatar: true,
+        uniqueOne: true
+      })
+    } else {
+      this.setData({
+        hideAvatar: true
+      })
+    }
+  },
+
+  toConfig: function (e) {
+    // console.log('form发生了submit事件，携带数据为：', e.detail.value),
+    // const { continue, interval } = e.detail.value,
+
+    wx.cloud.callFunction({
+      name: "getCircleDate",
+      data: {
+        intervalDate: e.detail.value.interval,
+        continueDate: e.detail.value.continue,
+      }
+    }).then(res => {
+      const { openid, continueNum, intervalNum } = res.result
+      //查询是否存在该条数据
+      DB.doc(`${openid}`).get().then(record => {
+        // console.log('7878查询', record)
+        if (record) {
+          //根据id更新单条数据
+          DB.doc(`${openid}`).update({
+            data: {
+              intervalNum: intervalNum,
+              continueNum: continueNum
+            }
+          }).then(
+            console.log('修改间隔天数和持续天数成功'),
+          ).catch(
+            console.error
+          )
+        } else {
+          // 插入数据
+          DB.add({
+            data: {
+              _id: `${openid}`,
+              intervalNum: intervalNum,
+              continueNum: continueNum
+            }
+          }).then(
+            console.log('插入间隔天数和持续天数成功'),
+          )
+        }
+      }).catch(
+        console.error
+      )
+      wx.navigateTo({
+        url: '../calendar/index'
+      })
+    })
   },
 
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+
   },
 
   formReset: function () {
     console.log('form发生了reset事件')
   },
 
-  onLoad: function() {
+  onLoad: function () {
+    if (app.globalData.openid = '') {
+      this.setData({
+        uniqueOne: false
+      })
+    }
+    // console.log('7878onLoad', app)
+  },
+
+  onShow: function () {
+    // console.log('7878onShow', app)
+  },
+
+  onLoad: function () {
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -44,7 +121,7 @@ Page({
     })
   },
 
-  onGetUserInfo: function(e) {
+  onGetUserInfo: function (e) {
     if (!this.data.logged && e.detail.userInfo) {
       this.setData({
         logged: true,
@@ -54,7 +131,7 @@ Page({
     }
   },
 
-  onGetOpenid: function() {
+  onGetOpenid: function () {
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
@@ -88,7 +165,7 @@ Page({
         })
 
         const filePath = res.tempFilePaths[0]
-        
+
         // 上传图片
         const cloudPath = `my-image${filePath.match(/\.[^.]+?$/)[0]}`
         wx.cloud.uploadFile({
@@ -100,7 +177,7 @@ Page({
             app.globalData.fileID = res.fileID
             app.globalData.cloudPath = cloudPath
             app.globalData.imagePath = filePath
-            
+
             wx.navigateTo({
               url: '../storageConsole/storageConsole'
             })

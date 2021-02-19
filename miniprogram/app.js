@@ -9,11 +9,23 @@ App({
         //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
         //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
         //   如不填则使用默认环境（第一个创建的环境）
-        // env: 'my-env-id',
+        // env: 'cloud1-7gxpsw7i3b71f7cf',
         traceUser: true,
       })
     }
 
-    this.globalData = {}
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+    }).then(res => {
+      // console.log('7878res', res)
+      this.globalData.openid = res.result.openid
+    }).catch(err => {
+      // console.log('7878err', err)
+    })
+
+    this.globalData = {
+      openid:''
+    }
   }
 })

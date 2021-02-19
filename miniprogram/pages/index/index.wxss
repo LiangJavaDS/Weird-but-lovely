@@ -21,7 +21,7 @@ page {
 }
 
 .printForm {
-  height: 400rpx;
+  height: 500rpx;
   width: 80%;
   border-radius: 10%;
   margin-left: 55rpx;
@@ -77,29 +77,38 @@ page {
   margin: auto;
 }
 
-.printInput{
+.printInput {
   border: 1rpx solid black;
   border-radius: 8px;
   height: 65rpx;
 }
 
-.settingButton{
+.settingButton {
   display: inline;
-
 }
 
-.btn-area{
+.btn-area {
   display: inline;
   /* background:red; */
-  margin: 30px;
+  margin: 5px;
 }
 
-input{
+.uploader-text,
+.tunnel-text {
+  text-align: center;
+  width: 100%;
+  line-height: 52px;
+  font-size: 50rpx;
+  color: white;
+}
+
+input {
   margin-top: 15px;
   margin-bottom: 15px;
-  text-align:center;
-  color:black;
+  text-align: center;
+  color: black;
 }
+
 /* .userinfo,
 .uploader,
 .tunnel {
