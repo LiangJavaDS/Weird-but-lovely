@@ -13,19 +13,20 @@ App({
         traceUser: true,
       })
     }
-
+    const DB = wx.cloud.database().collection('startDate');
+    // let db = ''
     wx.cloud.callFunction({
       name: 'login',
-      data: {},
+      data: { DB },
     }).then(res => {
-      // console.log('7878res', res)
       this.globalData.openid = res.result.openid
+      console.log('7878res', res)
     }).catch(err => {
-      // console.log('7878err', err)
+      console.log('7878err', err)
     })
 
     this.globalData = {
-      openid:''
+      openid: ''
     }
   }
 })

@@ -56,11 +56,22 @@ Page({
           //根据id更新单条数据
           DB.doc(`${openid}`).update({
             data: {
-              startDate: `${selectDate}`
+              startDate: `${selectDate}`,
+              first:'false'
             }
           }).then(
+            wx.showToast({
+              title: '更新成功',
+              icon: 'success',
+              duration: 2000
+            }),
             console.log('修改数据成功')
           ).catch(
+            // wx.showToast({
+            //   title: '更新失败',
+            //   icon: 'error',
+            //   duration: 2000
+            // }),
             console.error
           )
         } else {
@@ -68,12 +79,37 @@ Page({
           DB.add({
             data: {
               _id: `${openid}`,
-              startDate: selectDate
+              startDate: selectDate,
+              first:'false'
             }
           }).then(
+            wx.showToast({
+              title: '设置成功',
+              icon: 'success',
+              duration: 2000
+            }),
             console.log('插入数据成功'),
+          ).catch(
+            // wx.showToast({
+            //   title: '设置失败',
+            //   icon: 'error',
+            //   duration: 2000
+            // }),
+            console.error
           )
         }
+
+        // wx.showModal({
+        //   title: '提示',
+        //   content: '设置成功',
+        //   success (res) {
+        //     if (res.confirm) {
+        //       console.log('用户点击确定')
+        //     } else if (res.cancel) {
+        //       console.log('用户点击取消')
+        //     }
+        //   }
+        // })
       }).catch(
         console.error
       )

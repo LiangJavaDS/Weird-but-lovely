@@ -89,8 +89,7 @@ page {
 
 .btn-area {
   display: inline;
-  /* background:red; */
-  margin: 5px;
+  margin: 18px;
 }
 
 .uploader-text,

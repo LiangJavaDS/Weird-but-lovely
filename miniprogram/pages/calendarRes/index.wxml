@@ -1,7 +1,6 @@
-<!--miniprogram/pages/calendarRes/index.wxml-->
-<text>miniprogram/pages/calendarRes/index.wxml</text>
-<view class="section__title">
-  安全期分析
+
+<view class="analyse">
+  <p class="startP">安全期分析</p>
 </view>
 <calendar
   calendarConfig="{{calendarConfig}}"            
@@ -11,3 +10,8 @@
   bind:whenChangeWeek="whenChangeWeek" 
   bind:whenChangeMonth="whenChangeMonth"
   bind:afterCalendarRender="afterCalendarRender" />
+  <view class="footer">
+    <view class="buttonOk" bindtap="resetData">
+      <text>重新设置数据</text>
+    </view>
+  </view>

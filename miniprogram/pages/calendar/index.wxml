@@ -3,7 +3,7 @@
   <h3></h3>
 </view> -->
 <view class="section__title">
-  上次月经开始第一天
+  <p class="startP">上次月经开始的第一天是???</p>
 </view>
 <calendar 
   calendarConfig="{{calendarConfig}}"            
@@ -13,12 +13,12 @@
   bind:whenChangeWeek="whenChangeWeek" 
   bind:whenChangeMonth="whenChangeMonth"
   bind:afterCalendarRender="afterCalendarRender" />
-  <view class="uploader-text" bindtap="handleOk">
+  <view class="footer">
+    <view class="buttonOk" bindtap="handleOk">
       <text>确定</text>
+    </view>
+    <view class="buttonNext" bindtap="nextStep">
+        <text>下一步</text>
+    </view>
   </view>
-  <view class="uploader-text" bindtap="nextStep">
-      <text>下一步</text>
-  </view>
-  <!-- <view class="uploader-text" bindtap="focusDate">
-      <text>聚焦日期</text>
-  </view> -->
+
